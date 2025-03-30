@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comefan.taggoodsweb.mapper.TagMapper">
+    <resultMap id="BaseResultMap" type="com.comefan.taggoodsweb.entity.TagEntity">
+        <result column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="style" property="style" />
+        <result column="description" property="description" />
+        <result column="status" property="status" />
+        <result column="expire_time" property="expireTime" />
+        <result column="clean_on_delete" property="cleanOnDelete"/>
+        <result column="clean_on_expire" property="cleanOnExpire"/>
+        <result column="creator" property="creator"/>
+        <result column="modifier" property="modifier"/>
+        <result column="create_time" property="createTime"/>
+        <result column="modify_time" property="modifyTime"/>
+    </resultMap>
+    <select id="queryTagList" resultMap="BaseResultMap">
+        select * from tag
+        <where>
+            status = 0
+                 <if test="id != null">
+                     and id = #{id}
+                 </if>
+                 <if test="name != null">
+                     and `name` like concat('%', #{name},'%')
+                 </if>
+        </where>
+    </select>
+    <select id="queryTagById" resultMap="BaseResultMap">
+        select * from tag where id = #{id}
+    </select>
+    
+    <select id="queryExpiredTag" resultMap="BaseResultMap">
+        select * from tag where status = 0 and expire_time &lt; #{date}
+    </select>
+
+    <select id="queryTagByIds" resultMap="BaseResultMap">
+        select * from tag where id in 
+                          <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+                              #{id}
+                          </foreach>
+    </select>
+
+    <insert id="insert" parameterType="com.comefan.taggoodsweb.entity.TagEntity"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into tag(
+                        <trim suffixOverrides=",">
+                            `name`,
+                            style,
+                            description,
+                            status,
+                            expire_time,
+                            clean_on_delete,
+                            clean_on_expire,
+                            creator,
+                            modifier,
+                            create_time,
+                            modify_time,
+                        </trim>
+        )
+        values (
+                <trim suffixOverrides=",">
+                    #{name},
+                    #{style},
+                    #{description},
+                    #{status},
+                    #{expireTime},
+                    #{cleanOnDelete},
+                    #{cleanOnExpire},
+                    #{creator},
+                    #{modifier},
+                    #{createTime},
+                    #{modifyTime},
+                </trim>
+        )
+    </insert>
+</mapper>
