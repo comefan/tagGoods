@@ -1,9 +1,9 @@
 package com.comefan.taggoodsweb.common.enums;
 
 public enum TagStatusEnum {
-    USE(1, "使用中"),
-    DELETE(2, "已删除"),
-    EXPIRE(3, "已过期");
+    USE(0, "使用中"),
+    DELETE(1, "已删除"),
+    EXPIRE(2, "已过期");
     private Integer code;
     private String name;
     TagStatusEnum(Integer code, String name) {

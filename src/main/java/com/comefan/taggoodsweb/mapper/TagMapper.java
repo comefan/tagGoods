@@ -11,4 +11,8 @@ public interface TagMapper {
     List<TagEntity> queryTagList(@Param("id") Long id, @Param("name") String name);
 
     Integer insert(TagEntity tagEntity);
+
+    Integer update(TagEntity tagEntity);
+
+    TagEntity queryTagById(@Param("id") Long id);
 }

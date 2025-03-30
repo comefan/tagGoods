@@ -19,4 +19,12 @@ public class TagService {
     public Integer insert(TagEntity tagEntity){
         return tagMapper.insert(tagEntity);
     }
+
+    public Integer update(TagEntity tagEntity){
+        return tagMapper.update(tagEntity);
+    }
+
+    public TagEntity queryTagById(Long id){
+        return tagMapper.queryTagById(id);
+    }
 }

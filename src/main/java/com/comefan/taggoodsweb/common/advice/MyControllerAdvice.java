@@ -13,7 +13,7 @@ public class MyControllerAdvice {
     @ExceptionHandler(value = Exception.class)
     public BaseResponse handleException(Exception e){
         log.info("MyControllerAdvice handleException msg={}",e.getMessage(),e);
-        return BaseResponse.getFailResponse(BaseResponse.class,e.getMessage());
+        return BaseResponse.getFailResponse(BaseResponse.class,"系统异常，请联系管理员");
     }
 
 }

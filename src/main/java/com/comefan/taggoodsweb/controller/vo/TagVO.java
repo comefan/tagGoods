@@ -26,6 +26,10 @@ public class TagVO extends BaseVO {
         tagVO.setExpireTime(tagEntity.getExpireTime());
         tagVO.setCleanOnDelete(tagEntity.getCleanOnDelete());
         tagVO.setCleanOnExpire(tagEntity.getCleanOnExpire());
+        tagVO.setCreator(tagEntity.getCreator());
+        tagVO.setCreateTime(tagEntity.getCreateTime());
+        tagVO.setModifier(tagEntity.getModifier());
+        tagVO.setModifyTime(tagEntity.getModifyTime());
         return tagVO;
     }
 }
