@@ -1,8 +1,10 @@
 package com.comefan.taggoodsweb.controller.vo;
 
 import com.comefan.taggoodsweb.entity.TagEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -12,7 +14,9 @@ public class TagVO extends BaseVO {
     private String description;
     private Integer status;
     private String style;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date expireTime;
+//    private LocalDateTime expireTime;
     private Integer cleanOnDelete;
     private Integer cleanOnExpire;
 

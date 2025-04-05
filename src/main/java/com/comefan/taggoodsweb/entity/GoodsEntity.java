@@ -2,6 +2,8 @@ package com.comefan.taggoodsweb.entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class GoodsEntity extends BaseEntity{
     private Long id;
@@ -13,5 +15,7 @@ public class GoodsEntity extends BaseEntity{
     private String description;
 
     private String img;
+
+    private List<TagEntity> tagEntityList;
 
 }

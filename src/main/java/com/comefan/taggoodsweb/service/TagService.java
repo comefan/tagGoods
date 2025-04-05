@@ -5,6 +5,7 @@ import com.comefan.taggoodsweb.mapper.TagMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -26,5 +27,13 @@ public class TagService {
 
     public TagEntity queryTagById(Long id){
         return tagMapper.queryTagById(id);
+    }
+
+    public List<TagEntity> queryExpireTag(String currentDate){
+        return tagMapper.queryExpiredTag(currentDate);
+    }
+
+    public List<TagEntity> queryTagByIds(List<Long> ids){
+        return tagMapper.queryTagByIds(ids);
     }
 }

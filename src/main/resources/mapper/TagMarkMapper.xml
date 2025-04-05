@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.comefan.taggoodsweb.mapper.TagMarkMapper">
+    <resultMap id="BaseResultMap" type="com.comefan.taggoodsweb.entity.TagMarkEntity">
+        <result column="id" property="id"/>
+        <result column="tag_id" property="tagId"/>
+        <result column="goods_id" property="goodsId"/>
+        <result column="creator" property="creator" />
+        <result column="create_time" property="createTime" />
+        <result column="modifier" property="modifier" />
+        <result column="modify_time" property="modifyTime" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.comefan.taggoodsweb.entity.TagMarkEntity">
+        insert into tag_mark(
+                             <trim suffixOverrides=",">
+                                 tag_id,
+                                 goods_id,
+                                 creator,
+                                 create_time,
+                                 modifier,
+                                 modify_time
+                             </trim>
+        )
+        values (
+                <trim suffixOverrides=",">
+                    #{tagId},
+                    #{goodsId},
+                    #{creator},
+                    #{createTime},
+                    #{modifier},
+                    #{modifyTime}
+                </trim>
+        )
+    </insert>
+
+    <select id="queryTagMarkByGoods" resultMap="BaseResultMap">
+        select * from tag_mark
+        <where>
+            <if test="goodsId != null">
+                and goods_id = #{goodsId}
+            </if>
+        </where>
+    </select>
+
+    <select id="deleteByGoodsId" parameterType="long" resultType="java.lang.Integer">
+        delete from tag_mark where goods_id = #{goodsId}
+    </select>
+
+    <select id="deleteByTagId" parameterType="long" resultType="java.lang.Integer">
+        delete from tag_mark where tag_id = #{tagId}
+    </select>
+</mapper>

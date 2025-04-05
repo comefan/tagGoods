@@ -5,6 +5,7 @@ import com.comefan.taggoodsweb.common.spect.annotation.AutoFillDefaultValue;
 import com.comefan.taggoodsweb.controller.vo.BaseResponse;
 import com.comefan.taggoodsweb.controller.vo.TagVO;
 import com.comefan.taggoodsweb.entity.TagEntity;
+import com.comefan.taggoodsweb.service.TagMarkService;
 import com.comefan.taggoodsweb.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,9 @@ public class TagController {
 
     @Autowired
     private TagService tagService;
+
+    @Autowired
+    private TagMarkService tagMarkService;
 
     @GetMapping("/tag")
     public BaseResponse<List<TagVO>> queryuTagList(Long tagId, String tagName){
@@ -50,6 +54,10 @@ public class TagController {
         }
         tagEntity.setStatus(TagStatusEnum.DELETE.getCode());
         tagService.update(tagEntity);
+        if(tagEntity.getCleanOnDelete() == 0){
+            tagMarkService.deleteTagMarkByTagId(tagEntity.getId());
+        }
+
         return BaseResponse.getSuccessResponse(BaseResponse.class);
     }
 }

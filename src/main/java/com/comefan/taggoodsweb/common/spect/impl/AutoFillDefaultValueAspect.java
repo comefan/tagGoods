@@ -1,5 +1,6 @@
 package com.comefan.taggoodsweb.common.spect.impl;
 
+import com.comefan.taggoodsweb.controller.param.BaseParam;
 import com.comefan.taggoodsweb.entity.BaseEntity;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -35,6 +36,13 @@ public class AutoFillDefaultValueAspect {
                         baseEntity.setModifier(0);
                         baseEntity.setCreateTime(new Date());
                         baseEntity.setModifyTime(new Date());
+                    }
+                    if (arg instanceof BaseParam){
+                        BaseParam baseParam = (BaseParam) arg;
+                        baseParam.setCreator(0);
+                        baseParam.setModifier(0);
+                        baseParam.setCreateTime(new Date());
+                        baseParam.setModifyTime(new Date());
                     }
                 }
             }
